@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="h-full">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn Vue 3</title>
+  <script src="./vue.js"></script>
+  <script src="./tailwind.js"></script>
+
+</head>
+
+<body class="h-full grid place-items-center">
+
+  <div id="app">
+
+    <section v-if="InProgressAssignments.length" class="mb-4">
+
+      <h1 class="text-2xl font-bold mb-4">In Progress</h1>
+
+      <ul>
+        <li v-for="assignment in InProgressAssignments" :key="assignment.id">
+          <label>
+            <input type="checkbox" v-model="assignment.completed">
+            {{ assignment.name }}
+          </label>
+        </li>
+      </ul>
+
+    </section>
+
+    <section v-if="completedAssignments.length" class="mb-4">
+
+      <h1 class="text-2xl font-bold mb-4">Completed</h1>
+      <ul>
+
+        <li v-for="assignment in completedAssignments" :key="assignment.id">
+          <label>
+            <input type="checkbox" checked disabled>
+            {{ assignment.name }}
+          </label>
+        </li>
+      </ul>
+
+    </section>
+
+  </div>
+
+  <script>
+
+    let app = {
+
+      data() {
+        return {
+          assignmentsArray: [
+            { name: 'Assignment 1', completed: false, id: 1 },
+            { name: 'Assignment 2', completed: false, id: 2 },
+            { name: 'Assignment 3', completed: false, id: 3 },
+          ]
+        }
+      },
+
+      computed: {
+        InProgressAssignments() {
+          return this.assignmentsArray.filter(assignment => !assignment.completed);
+        },
+
+        completedAssignments() {
+          return this.assignmentsArray.filter(assignment => assignment.completed);
+        }
+      },
+
+    }
+
+    Vue.createApp(app).mount('#app');
+
+
+  </script>
+
+</body>
+
+</html>
