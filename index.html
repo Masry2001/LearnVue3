@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learn Vue 3</title>
-  <script src="./vue.js"></script>
-  <script src="./tailwind.js"></script>
+  <link rel="stylesheet" href="./is-loading.css">
+  <script src="./js/vue.js"></script>
+  <script src="./js/tailwind.js"></script>
 
 </head>
 
@@ -17,15 +18,9 @@
 
   </div>
 
-  <script>
-
-    let app = {
-
-
-
-    }
-
-    Vue.createApp(app).mount('#app');
+  <script type="module">
+    import App from './js/components/App.js';
+    Vue.createApp(App).mount('#app');
 
 
   </script>
