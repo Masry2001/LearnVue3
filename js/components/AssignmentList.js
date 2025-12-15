@@ -11,7 +11,7 @@ export default {
 
       <h1 class="text-2xl font-bold mb-4">{{ title }}</h1>
 
-      <ul>
+      <ul class="border border-gray-600 p-4 divide-y divide-gray-600">
         <AssignmentListItem v-for="assignment in assignments" :assignment="assignment" />
       </ul>
 
