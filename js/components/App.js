@@ -1,15 +1,22 @@
 import Assignments from './Assignments.js';
+import Panel from './Panel.js';
 
 
 export default {
 
   components: {
-    Assignments
+    Assignments,
+    Panel
 
   },
 
   template: `
-     <Assignments />
+  <div class="space-y-4">
+  
+    <Assignments />
+    
+    
+  </div>
   `,
 
 

@@ -9,28 +9,34 @@ export default {
   },
 
   template: `
+    <section class="flex gap-8">
+        <AssignmentList 
+        :assignments="filters.inProgressAssignments" 
+        title="In Progress">
 
-    <AssignmentList 
-    :assignments="filters.inProgressAssignments" 
-    title="In Progress" />
+            <AssignmentCreate @addAssignment="addAssignment"/>
 
-    <AssignmentList 
-    :assignments="filters.completedAssignments" 
-    title="Completed" />
+        </AssignmentList>
 
-    <AssignmentCreate @addAssignment="addAssignment"/>
+        <AssignmentList 
+        :assignments="filters.completedAssignments" 
+        title="Completed" :canToggle="true" />
 
-
+        </section>
 `,
+
   data() {
     return {
-      assignmentsArray: [
-        { name: 'Assignment 1', completed: false, id: 1 },
-        { name: 'Assignment 2', completed: false, id: 2 },
-        { name: 'Assignment 3', completed: false, id: 3 },
-      ],
-
+      assignmentsArray: []
     }
+  },
+
+  created() {
+    fetch('http://localhost:3001/assignments')
+      .then(response => response.json())
+      .then(data => {
+        this.assignmentsArray = data;
+      });
   },
 
   computed: {
@@ -46,9 +52,10 @@ export default {
     },
 
   },
+
   methods: {
-    addAssignment(name) {
-      this.assignmentsArray.push({ name: name, completed: false, id: this.assignmentsArray.length + 1 });
+    addAssignment(name, tag) {
+      this.assignmentsArray.push({ name: name, completed: false, id: this.assignmentsArray.length + 1, tag: tag });
     }
   }
 }
